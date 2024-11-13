@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: Karelia API programming 1.0
+  description: |-
+    This is a pracise API for API programming course  
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: alinajussila@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+
+security: 
+  - bearerAuth: []
+
+servers:
+  - url: http://localhost:3000/
+tags:
+  - name: Sample dataset
+    description: Everything you neet do know about APIs
+    externalDocs:
+      description: Find out more
+      url: http://karelia.fi
+paths:
+  /data: 
+    get:
+      tags:
+        - Sample dataset 
+      summary: Returns a dataset 
+      description: Returns a dataset with something more ...
+      responses: 
+        '200':
+          description: Successful operation 
+          content: 
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Data'
+        '415':
+          description: Unsupported media type
+  /id: 
+    get:
+      tags:
+        - IDs 
+      summary: Returns an id
+      description: Returns an id
+      responses: 
+        '200':
+          description: Successful operation 
+          content: 
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/id'
+        '415':
+          description: Unsupported media type
+  /: 
+    post:
+      tags:
+        - Handling data
+      summary: Handles data
+      description: This handles the data with checking if it exists
+      responses: 
+        '200':
+          description: Successful operation 
+          content: 
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Data'
+        '415':
+          description: Unsupported media type
+
+components:
+  schemas:
+    Data:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 111
+        forename:
+          type: string
+          example: Roy
+        surname:
+          type: string
+          example: Fielding
+  securitySchemes: 
+    bearerAuth: # arbitary name for the security scheme 
+      type: http
+      scheme: bearer 
+      bearerFormat: JWT #optional, arbitary values for documentation purposes
